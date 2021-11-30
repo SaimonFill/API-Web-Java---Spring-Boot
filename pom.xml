@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	
-	<groupId>io.github.cwi-reset</groupId>
-	<artifactId>tcc-SaimonFill</artifactId>
+	<groupId>io.github.api.reservas</groupId>
+	<artifactId>Reservas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tcc-SaimonFill</name>
+	<name>SaimonFill</name>
 
 	<properties>
 		<java.version>1.8</java.version>
