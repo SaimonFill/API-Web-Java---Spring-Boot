@@ -17,4 +17,5 @@ public interface AnuncioRepository extends CrudRepository<Anuncio, Long> {
     Page<Anuncio> findByAnunciante_IdAndAtivoTrue(Pageable pageable, Long idAnunciante);
 
     boolean existsByAtivoTrueAndImovel_Id(Long idImovel);
+
 }

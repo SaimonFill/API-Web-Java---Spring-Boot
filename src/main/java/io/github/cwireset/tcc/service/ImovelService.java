@@ -10,9 +10,8 @@ import io.github.cwireset.tcc.request.CadastrarImovelRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ImovelService {
@@ -71,6 +70,11 @@ public class ImovelService {
 
         Imovel imovel = imovelRepository.findById(idImovel)
                 .orElseThrow(() -> new ConsultaIdInvalidoException("Imovel", idImovel));
+
+        if (imovel.isAtivo() == false) {
+            throw new ConsultaIdInvalidoException("Imovel", idImovel);
+        }
+
         imovel.setAtivo(false);
         imovelRepository.save(imovel);
     }

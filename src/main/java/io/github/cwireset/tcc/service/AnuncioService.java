@@ -33,9 +33,7 @@ public class AnuncioService {
         final Imovel imovel = imovelService.buscaImovelPorId(cadastrarAnuncioRequest.getIdImovel());
         final Long idImovel = cadastrarAnuncioRequest.getIdImovel();
 
-        if (validaImovelComAnuncio(idImovel)) {
-            throw new ImovelJaContemAnuncioException(idImovel);
-        }
+        validaImovelComAnuncio(idImovel);
 
         final Anuncio anuncio = new Anuncio(
                 cadastrarAnuncioRequest.getTipoAnuncio(),
@@ -59,8 +57,14 @@ public class AnuncioService {
         return anuncioRepository.findByAnunciante_IdAndAtivoTrue(pageable, idAnunciante);
     }
 
-    public boolean validaImovelComAnuncio(Long idImovel) {
-        return anuncioRepository.existsByImovel_Id(idImovel);
+    public boolean validaImovelComAnuncio(Long idImovel) throws Exception {
+//       boolean imovelContemAnuncio = anuncioRepository.existsByImovel_Id(idImovel);
+       boolean imovelContemAnuncioTrue = anuncioRepository.existsByAtivoTrueAndImovel_Id(idImovel);
+
+       if(imovelContemAnuncioTrue) {
+           throw new ImovelJaContemAnuncioException(idImovel);
+       }
+       return true;
     }
 
     public void excluirAnuncio(Long idAnuncio) throws Exception {
