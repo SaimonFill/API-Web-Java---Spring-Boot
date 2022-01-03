@@ -5,13 +5,14 @@ import io.github.api.reservas.domain.Reserva;
 import io.github.api.reservas.domain.StatusPagamento;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 
 @Repository
-public interface ReservaRepository extends CrudRepository<Reserva, Long> {
+public interface ReservaRepository extends JpaRepository<Reserva, Long> {
 
     boolean existsByPagamento_StatusEqualsOrPagamento_StatusEquals(StatusPagamento cancelado, StatusPagamento estornado);
 
