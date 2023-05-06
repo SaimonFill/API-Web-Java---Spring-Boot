@@ -1,30 +1,24 @@
 package io.github.api.reservas.service;
 
+import io.github.api.reservas.domain.Imovel;
+import io.github.api.reservas.domain.Usuario;
 import io.github.api.reservas.exception.ConsultaIdInvalidoException;
 import io.github.api.reservas.exception.NaoExcluiImovelComAnuncioException;
 import io.github.api.reservas.repository.AnuncioRepository;
 import io.github.api.reservas.repository.ImovelRepository;
-import io.github.api.reservas.domain.Imovel;
-import io.github.api.reservas.domain.Usuario;
 import io.github.api.reservas.request.CadastrarImovelRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ImovelService {
 
-    private UsuarioService usuarioService;
-    private ImovelRepository imovelRepository;
-    private AnuncioRepository anuncioRepository;
-
-    @Autowired
-    public ImovelService(UsuarioService usuarioService, ImovelRepository imovelRepository, AnuncioRepository anuncioRepository) {
-        this.usuarioService = usuarioService;
-        this.imovelRepository = imovelRepository;
-        this.anuncioRepository = anuncioRepository;
-    }
+    private final UsuarioService usuarioService;
+    private final ImovelRepository imovelRepository;
+    private final AnuncioRepository anuncioRepository;
 
     public Imovel cadastraImovel(CadastrarImovelRequest cadastrarImovelRequest) throws Exception {
 

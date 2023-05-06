@@ -1,30 +1,24 @@
 package io.github.api.reservas.service;
 
-import io.github.api.reservas.exception.ConsultaIdInvalidoException;
-import io.github.api.reservas.exception.ImovelJaContemAnuncioException;
-import io.github.api.reservas.repository.AnuncioRepository;
 import io.github.api.reservas.domain.Anuncio;
 import io.github.api.reservas.domain.Imovel;
 import io.github.api.reservas.domain.Usuario;
+import io.github.api.reservas.exception.ConsultaIdInvalidoException;
+import io.github.api.reservas.exception.ImovelJaContemAnuncioException;
+import io.github.api.reservas.repository.AnuncioRepository;
 import io.github.api.reservas.request.CadastrarAnuncioRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AnuncioService {
 
-    private UsuarioService usuarioService;
-    private ImovelService imovelService;
-    private AnuncioRepository anuncioRepository;
-
-    @Autowired
-    public AnuncioService(UsuarioService usuarioService, ImovelService imovelService, AnuncioRepository anuncioRepository) {
-        this.usuarioService = usuarioService;
-        this.imovelService = imovelService;
-        this.anuncioRepository = anuncioRepository;
-    }
+    private final UsuarioService usuarioService;
+    private final ImovelService imovelService;
+    private final AnuncioRepository anuncioRepository;
 
     public Anuncio cadastraAnuncio(CadastrarAnuncioRequest cadastrarAnuncioRequest) throws Exception {
         final Usuario anunciante = usuarioService.buscaUsuarioPorId(cadastrarAnuncioRequest.getIdAnunciante());
