@@ -9,13 +9,13 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>io.github.cwi-reset</groupId>
-	<artifactId>tcc-SaimonFill</artifactId>
+	<groupId>io.github</groupId>
+	<artifactId>api-web-spring-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tcc-SaimonFill</name>
+	<name>api-web-spring-boot</name>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

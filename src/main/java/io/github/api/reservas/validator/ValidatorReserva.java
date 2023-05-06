@@ -1,32 +1,23 @@
 package io.github.api.reservas.validator;
 
-import io.github.api.reservas.exception.*;
-import io.github.api.reservas.repository.ReservaRepository;
 import io.github.api.reservas.domain.Anuncio;
 import io.github.api.reservas.domain.StatusPagamento;
 import io.github.api.reservas.domain.TipoImovel;
 import io.github.api.reservas.exception.*;
+import io.github.api.reservas.repository.ReservaRepository;
 import io.github.api.reservas.request.CadastrarReservaRequest;
 import io.github.api.reservas.service.AnuncioService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class ValidatorReserva {
 
-    private AnuncioService anuncioService;
-    private ReservaRepository reservaRepository;
-
-    @Autowired
-    public ValidatorReserva(AnuncioService anuncioService, ReservaRepository reservaRepository) {
-        this.anuncioService = anuncioService;
-        this.reservaRepository = reservaRepository;
-    }
-
-    public ValidatorReserva() {
-    }
+    private final AnuncioService anuncioService;
+    private final ReservaRepository reservaRepository;
 
     public void validaHoraReserva(CadastrarReservaRequest cadastrarReservaRequest) {
         LocalDateTime dataHoraInicial = cadastrarReservaRequest.getPeriodo().getDataHoraInicial();

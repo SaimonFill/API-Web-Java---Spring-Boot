@@ -3,7 +3,7 @@ package io.github.api.reservas.controller;
 import io.github.api.reservas.domain.Usuario;
 import io.github.api.reservas.request.AtualizarUsuarioRequest;
 import io.github.api.reservas.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService usuarioService;
+    private final UsuarioService usuarioService;
 
     @PostMapping
     public ResponseEntity<Usuario> cadastraUsuario(@RequestBody @Valid Usuario usuario) throws Exception {

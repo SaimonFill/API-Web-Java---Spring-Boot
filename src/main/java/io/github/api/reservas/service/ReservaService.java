@@ -8,28 +8,22 @@ import io.github.api.reservas.exception.PagamentoInvalidoException;
 import io.github.api.reservas.repository.ReservaRepository;
 import io.github.api.reservas.request.CadastrarReservaRequest;
 import io.github.api.reservas.validator.ValidatorReserva;
-import io.github.api.reservas.domain.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Service
+@RequiredArgsConstructor
 public class ReservaService {
 
-    private UsuarioService usuarioService;
-    private AnuncioService anuncioService;
-    private ReservaRepository reservaRepository;
+    private final UsuarioService usuarioService;
+    private final AnuncioService anuncioService;
+    private final ReservaRepository reservaRepository;
 //    private ValidatorReserva validatorReserva;
-
-    @Autowired
-    public ReservaService(UsuarioService usuarioService, AnuncioService anuncioService, ReservaRepository reservaRepository) {
-        this.usuarioService = usuarioService;
-        this.anuncioService = anuncioService;
-        this.reservaRepository = reservaRepository;
-    }
 
     public Reserva criaReserva(CadastrarReservaRequest cadastrarReservaRequest) throws Exception {
         final Usuario solicitante = usuarioService.buscaUsuarioPorId(cadastrarReservaRequest.getIdSolicitante());

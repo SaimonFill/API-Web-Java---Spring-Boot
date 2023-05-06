@@ -7,24 +7,17 @@ import io.github.api.reservas.request.CadastrarReservaRequest;
 import io.github.api.reservas.service.AnuncioService;
 import io.github.api.reservas.service.ReservaService;
 import io.github.api.reservas.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class ReservaDTO {
 
-    private ReservaService reservaService;
-    private DadosSolicitanteResponse solicitante;
-    private UsuarioService usuarioService;
-    private DadosAnuncioResponse anuncio;
-    private AnuncioService anuncioService;
+    private final ReservaService reservaService;
+    private final UsuarioService usuarioService;
+    private final AnuncioService anuncioService;
 
-    @Autowired
-    public ReservaDTO(ReservaService reservaService, UsuarioService usuarioService, AnuncioService anuncioService) {
-        this.reservaService = reservaService;
-        this.usuarioService = usuarioService;
-        this.anuncioService = anuncioService;
-    }
 
     public InformacaoReservaResponse reservaResponse(CadastrarReservaRequest cadastrarReservaRequest) throws Exception {
         final Usuario nomeSolicitante = usuarioService.buscaUsuarioPorId(cadastrarReservaRequest.getIdSolicitante());
@@ -33,12 +26,12 @@ public class ReservaDTO {
 
         return new InformacaoReservaResponse(
                 dadosReserva.getId(),
-                solicitante = new DadosSolicitanteResponse(
+                new DadosSolicitanteResponse(
                         cadastrarReservaRequest.getIdSolicitante(),
                         nomeSolicitante.getNome()
                 ),
                 dadosReserva.getQuantidadePessoas(),
-                anuncio = new DadosAnuncioResponse(
+                new DadosAnuncioResponse(
                         dadosAnuncio.getId(),
                         dadosAnuncio.getImovel(),
                         dadosAnuncio.getAnunciante(),

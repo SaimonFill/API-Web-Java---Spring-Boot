@@ -3,10 +3,10 @@ package io.github.api.reservas.controller;
 import io.github.api.reservas.domain.FormaPagamento;
 import io.github.api.reservas.domain.Reserva;
 import io.github.api.reservas.request.CadastrarReservaRequest;
-import io.github.api.reservas.response.ReservaDTO;
 import io.github.api.reservas.response.InformacaoReservaResponse;
+import io.github.api.reservas.response.ReservaDTO;
 import io.github.api.reservas.service.ReservaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,14 +18,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/reservas")
 public class ReservaController {
 
-    @Autowired
-    private ReservaService reservaService;
-    @Autowired
-    private ReservaDTO informacaoReservaResponse;
+    private final ReservaService reservaService;
+
+    private final ReservaDTO informacaoReservaResponse;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

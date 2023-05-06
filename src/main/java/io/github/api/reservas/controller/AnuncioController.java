@@ -3,7 +3,7 @@ package io.github.api.reservas.controller;
 import io.github.api.reservas.domain.Anuncio;
 import io.github.api.reservas.request.CadastrarAnuncioRequest;
 import io.github.api.reservas.service.AnuncioService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/anuncios")
 public class AnuncioController {
 
-    @Autowired
-    private AnuncioService anuncioService;
+    private final AnuncioService anuncioService;
 
     @PostMapping
     public ResponseEntity<Anuncio> cadastraAnuncio(@RequestBody @Valid CadastrarAnuncioRequest cadastrarAnuncioRequest) throws Exception {

@@ -3,7 +3,7 @@ package io.github.api.reservas.controller;
 import io.github.api.reservas.domain.Imovel;
 import io.github.api.reservas.request.CadastrarImovelRequest;
 import io.github.api.reservas.service.ImovelService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/imoveis")
 public class ImovelController {
 
-    @Autowired
-    private ImovelService imovelService;
+    private final ImovelService imovelService;
 
     @PostMapping
     public ResponseEntity<Imovel> cadastraImovel(@RequestBody @Valid CadastrarImovelRequest cadastrarImovelRequest) throws Exception {

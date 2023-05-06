@@ -1,27 +1,25 @@
 package io.github.api.reservas.service;
 
+import io.github.api.reservas.avatar.AvatarInterface;
+import io.github.api.reservas.domain.Usuario;
 import io.github.api.reservas.exception.ConsultaCpfInvalidoException;
 import io.github.api.reservas.exception.ConsultaIdInvalidoException;
 import io.github.api.reservas.exception.CpfJaExisteException;
 import io.github.api.reservas.exception.EmailJaExisteException;
 import io.github.api.reservas.repository.UsuarioRepository;
-import io.github.api.reservas.avatar.AvatarInterface;
-import io.github.api.reservas.domain.Usuario;
-import io.github.api.reservas.exception.*;
 import io.github.api.reservas.request.AtualizarUsuarioRequest;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UsuarioService {
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-    @Autowired
-    AvatarInterface avatarInterface;
+    private final UsuarioRepository usuarioRepository;
+    private final AvatarInterface avatarInterface;
 
     public Usuario cadastraUsuario(Usuario usuario) throws Exception {
         boolean emailDuplicado = usuarioRepository.existsByEmail(usuario.getEmail());
