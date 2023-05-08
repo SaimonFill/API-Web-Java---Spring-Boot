@@ -33,8 +33,7 @@ public class ImovelService {
                 .build();
 
         imovel.setAtivo(true);
-        imovelRepository.save(imovel);
-        return imovel;
+        return imovelRepository.save(imovel);
     }
 
     public Page<Imovel> listarImoveis(Pageable pageable) {

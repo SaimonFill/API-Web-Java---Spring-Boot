@@ -7,6 +7,7 @@ import io.github.api.reservas.exception.CpfJaExisteException;
 import io.github.api.reservas.exception.EmailJaExisteException;
 import io.github.api.reservas.repository.UsuarioRepository;
 import io.github.api.reservas.request.AtualizarUsuarioRequest;
+import io.github.api.reservas.request.CadastrarUsuarioRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,19 +20,27 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
 
-    public Usuario cadastraUsuario(Usuario usuario) throws Exception {
-        boolean emailDuplicado = usuarioRepository.existsByEmail(usuario.getEmail());
-        boolean cpfDuplicado = usuarioRepository.existsByCpf(usuario.getCpf());
+    public Usuario cadastraUsuario(CadastrarUsuarioRequest cadastrarUsuarioRequest) throws Exception {
+        boolean emailDuplicado = usuarioRepository.existsByEmail(cadastrarUsuarioRequest.getEmail());
+        boolean cpfDuplicado = usuarioRepository.existsByCpf(cadastrarUsuarioRequest.getCpf());
 
         if (emailDuplicado) {
-            throw new EmailJaExisteException(usuario.getEmail());
+            throw new EmailJaExisteException(cadastrarUsuarioRequest.getEmail());
         }
         if (cpfDuplicado) {
-            throw new CpfJaExisteException(usuario.getCpf());
+            throw new CpfJaExisteException(cadastrarUsuarioRequest.getCpf());
         }
 
-        usuarioRepository.save(usuario);
-        return usuario;
+        Usuario usuario = Usuario.builder()
+                .nome(cadastrarUsuarioRequest.getNome())
+                .email(cadastrarUsuarioRequest.getEmail())
+                .senha(cadastrarUsuarioRequest.getSenha())
+                .cpf(cadastrarUsuarioRequest.getCpf())
+                .dataNascimento(cadastrarUsuarioRequest.getDataNascimento())
+                .endereco(cadastrarUsuarioRequest.getEndereco())
+                .build();
+
+        return usuarioRepository.save(usuario);
     }
 
     public Page<Usuario> listarUsuarios(@PageableDefault Pageable pageable) {
@@ -78,7 +87,6 @@ public class UsuarioService {
         usuario.setNome(atualizarUsuarioRequest.getNome());
         usuario.setSenha(atualizarUsuarioRequest.getSenha());
 
-        usuarioRepository.save(usuario);
-        return usuario;
+        return usuarioRepository.save(usuario);
     }
 }

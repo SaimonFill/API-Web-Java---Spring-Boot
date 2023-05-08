@@ -23,7 +23,6 @@ public class ReservaService {
     private final UsuarioService usuarioService;
     private final AnuncioService anuncioService;
     private final ReservaRepository reservaRepository;
-//    private ValidatorReserva validatorReserva;
 
     public void criaReserva(CadastrarReservaRequest cadastrarReservaRequest) throws Exception {
         final Usuario solicitante = usuarioService.buscaUsuarioPorId(cadastrarReservaRequest.getIdSolicitante());

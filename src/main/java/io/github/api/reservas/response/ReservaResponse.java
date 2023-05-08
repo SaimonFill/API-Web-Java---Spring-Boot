@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ReservaDTO {
+public class ReservaResponse {
 
     private final ReservaService reservaService;
     private final UsuarioService usuarioService;
