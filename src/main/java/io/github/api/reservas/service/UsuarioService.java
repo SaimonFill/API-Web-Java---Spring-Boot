@@ -8,6 +8,7 @@ import io.github.api.reservas.exception.EmailJaExisteException;
 import io.github.api.reservas.repository.UsuarioRepository;
 import io.github.api.reservas.request.AtualizarUsuarioRequest;
 import io.github.api.reservas.request.CadastrarUsuarioRequest;
+import io.github.api.reservas.validator.ValidatorUsuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,17 +20,10 @@ import org.springframework.stereotype.Service;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
+    private final ValidatorUsuario validatorUsuario;
 
     public Usuario cadastraUsuario(CadastrarUsuarioRequest cadastrarUsuarioRequest) throws Exception {
-        boolean emailDuplicado = usuarioRepository.existsByEmail(cadastrarUsuarioRequest.getEmail());
-        boolean cpfDuplicado = usuarioRepository.existsByCpf(cadastrarUsuarioRequest.getCpf());
-
-        if (emailDuplicado) {
-            throw new EmailJaExisteException(cadastrarUsuarioRequest.getEmail());
-        }
-        if (cpfDuplicado) {
-            throw new CpfJaExisteException(cadastrarUsuarioRequest.getCpf());
-        }
+        validatorUsuario.validaCadastroUsuario(cadastrarUsuarioRequest.getEmail(), cadastrarUsuarioRequest.getCpf());
 
         Usuario usuario = Usuario.builder()
                 .nome(cadastrarUsuarioRequest.getNome())
