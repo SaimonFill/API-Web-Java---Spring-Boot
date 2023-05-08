@@ -1,6 +1,5 @@
 package io.github.api.reservas.service;
 
-import io.github.api.reservas.avatar.AvatarInterface;
 import io.github.api.reservas.domain.Usuario;
 import io.github.api.reservas.exception.ConsultaCpfInvalidoException;
 import io.github.api.reservas.exception.ConsultaIdInvalidoException;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
-    private final AvatarInterface avatarInterface;
 
     public Usuario cadastraUsuario(Usuario usuario) throws Exception {
         boolean emailDuplicado = usuarioRepository.existsByEmail(usuario.getEmail());
