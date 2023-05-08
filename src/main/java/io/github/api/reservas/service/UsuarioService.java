@@ -32,17 +32,6 @@ public class UsuarioService {
             throw new CpfJaExisteException(usuario.getCpf());
         }
 
-        usuario = new Usuario(
-                usuario.getId(),
-                usuario.getNome(),
-                usuario.getEmail(),
-                usuario.getSenha(),
-                usuario.getCpf(),
-                usuario.getDataNascimento(),
-                usuario.getEndereco(),
-                avatarInterface.getAvatar().getLink()
-        );
-
         usuarioRepository.save(usuario);
         return usuario;
     }

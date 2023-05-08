@@ -24,13 +24,13 @@ public class ImovelService {
 
         final Usuario proprietario = usuarioService.buscaUsuarioPorId(cadastrarImovelRequest.getIdProprietario());
 
-        final Imovel imovel = new Imovel(
-                cadastrarImovelRequest.getIdentificacao(),
-                cadastrarImovelRequest.getTipoImovel(),
-                cadastrarImovelRequest.getEndereco(),
-                proprietario,
-                cadastrarImovelRequest.getCaracteristicas()
-        );
+        final Imovel imovel = Imovel.builder()
+                .identificacao(cadastrarImovelRequest.getIdentificacao())
+                .tipoImovel(cadastrarImovelRequest.getTipoImovel())
+                .endereco(cadastrarImovelRequest.getEndereco())
+                .proprietario(proprietario)
+                .caracteristicas(cadastrarImovelRequest.getCaracteristicas())
+                .build();
 
         imovel.setAtivo(true);
         imovelRepository.save(imovel);
@@ -41,7 +41,7 @@ public class ImovelService {
         return imovelRepository.findByAtivoTrue(pageable);
     }
 
-    public Page<Imovel> buscaImovelPorIdProprietario(Pageable pageable, Long idProprietario) throws Exception {
+    public Page<Imovel> buscaImovelPorIdProprietario(Pageable pageable, Long idProprietario) {
         return imovelRepository.findByAtivoTrueAndProprietario_Id(pageable, idProprietario);
     }
 
@@ -64,7 +64,7 @@ public class ImovelService {
         Imovel imovel = imovelRepository.findById(idImovel)
                 .orElseThrow(() -> new ConsultaIdInvalidoException("Imovel", idImovel));
 
-        if (imovel.isAtivo() == false) {
+        if (!imovel.isAtivo()) {
             throw new ConsultaIdInvalidoException("Imovel", idImovel);
         }
 
