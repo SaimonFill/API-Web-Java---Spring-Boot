@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Long> {
@@ -20,7 +19,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
 
     Page<Booking> findByAnnouncement_Advertiser_Id(Long advertiserId, Pageable pageable);
 
-    boolean existsByIdAndAnnouncement_PaymentTypes(Long id, List<PaymentTypes> announcement_paymentTypes);
+    boolean existsByIdAndAnnouncement_PaymentTypes(Long bookingId, PaymentTypes paymentTypes);
 
     boolean existsByPeriod_InitDateLessThanAndAnnouncement_Id(LocalDateTime finalDate, Long announcementId);
 
