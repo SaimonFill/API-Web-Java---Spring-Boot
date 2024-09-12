@@ -1,3 +1,3 @@
-# Projeto API Web Sprin Boot - Reservas
+# Projeto API Web Sprin Boot - Booking
 
-Esta API Web Java, utilizando Spring Boot, o propósito era desenvolver uma API Web para simular um site de reservas, como o Airbnb.
+This Java Web API, using Spring Boot, the purpose was to develop a Web API to simulate a booking site such as Airbnb.
